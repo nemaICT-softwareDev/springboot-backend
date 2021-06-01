@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Utils {
 
-    public Game findUserOrThrowNotFound(Long id, GameRepository gameRepository) {
+    public Game findGameOrThrowNotFound(Long id, GameRepository gameRepository) {
         return gameRepository
                 .findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Unfortunatly no user was found with id nr " + id));

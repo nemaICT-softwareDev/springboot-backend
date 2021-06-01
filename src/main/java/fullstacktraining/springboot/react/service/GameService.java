@@ -5,6 +5,8 @@ import fullstacktraining.springboot.react.model.Game;
 import fullstacktraining.springboot.react.repository.GameRepository;
 import fullstacktraining.springboot.react.utils.Utils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,25 +19,31 @@ public class GameService {
     private final Utils utils;
     private final GameRepository gameRepository;
 
-    public List<Game> findAll(){
+    public Page<Game> listAll(Pageable pageable){
+        return gameRepository.findAll(pageable);
+    }
+
+    public List<Game> listAllNonPageable() {
         return gameRepository.findAll();
     }
 
+    public List<Game> findByTitle(String title){return gameRepository.findByTitle(title);}
+
+    public Game findByIdOrThrowBadRequestException(long id) {
+        return gameRepository.findById(id)
+                .orElseThrow(() -> new BadRequestException("Game not Found"));
+    }
+
     @Transactional
-    public Game saveGame(Game game){
+    public Game save(Game game){
         return gameRepository.save(game);
     }
 
-    public Game updateGame(Game game){
-      return gameRepository.save(game);
+    public void delete(Long id){
+        gameRepository.delete(findByIdOrThrowBadRequestException(id));
     }
 
-    public Game findById(Long id){
-        return gameRepository.findById(id)
-                .orElseThrow(() -> new BadRequestException("Employee not found with id: " + id));
-    }
-
-    public void deleteGame(Long id){
-        gameRepository.delete(utils.findUserOrThrowNotFound(id, gameRepository));
+     public Game update(Game game) {
+       return gameRepository.save(game);
     }
 }
