@@ -17,6 +17,7 @@
         <java.version>11</java.version>
         <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
         <springdoc-openapi-security.version>1.5.9</springdoc-openapi-security.version>
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
     </properties>
     <dependencies>
 

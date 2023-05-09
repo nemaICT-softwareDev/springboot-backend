@@ -1,4 +1,6 @@
 package fullstacktraining.springboot.react.controller;
+
+
 import fullstacktraining.springboot.react.model.Game;
 import fullstacktraining.springboot.react.service.GameService;
 import fullstacktraining.springboot.react.utils.Utils;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/games")
